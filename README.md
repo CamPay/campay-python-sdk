@@ -54,30 +54,30 @@ for notes on how to deploy the project on a live system.
 
 ### To collect payments from your client 
 
-    ```python
+   ```python
          collect = campay.collect({
             "amount": "5", #The amount you want to collect
             "currency": "XAF",
             "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
             "description": "some description"
          })
-    ```
+   ```
 
 ### To disburse
-    > Please enable API withdrawal under app settings before trying this request
-
-    ```python
+   > Please enable API withdrawal under app settings before trying this request
+   
+   ```python
         disburse = campay.disburse({
             "amount": "5", #The amount you want to disburse
             "currency": "XAF",
             "to": "237679587525", #Phone number to disburse amount to. Must include country code
             "description": "some description"
         })
-    ```
+   ```
 
 ### To Get application balance.
 
-    ```python
+   ```python
         balance = campay.get_balance()
    ```
 
