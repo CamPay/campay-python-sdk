@@ -1,5 +1,5 @@
 
-from campay.tools import Client
+from campay.sdk import Client
 
 
 campay = Client({

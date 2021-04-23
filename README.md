@@ -61,6 +61,8 @@ for notes on how to deploy the project on a live system.
             "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
             "description": "some description"
          })
+
+         print(collect)
    ```
 
 ### To disburse
@@ -73,12 +75,16 @@ for notes on how to deploy the project on a live system.
             "to": "237679587525", #Phone number to disburse amount to. Must include country code
             "description": "some description"
         })
+
+        print(disburse)
    ```
 
 ### To Get application balance.
 
    ```python
         balance = campay.get_balance()
+
+        print(balance)
    ```
 
 
