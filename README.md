@@ -1,4 +1,5 @@
-# campay-python-sdk
+# [CamPay](https://www.campay.net/) Python SDK
+
 Python SDK for CamPay Payment Gateway
 
 CamPay is a Fintech service of the company TAKWID
@@ -14,8 +15,6 @@ your customers thanks to our mobile money
 payment solutions, accessible via your website
 and/or mobile application.
 
-##################################
-# [CamPay](https://www.campay.net/) Python SDK
 
 ## Summary
 
@@ -36,10 +35,8 @@ for notes on how to deploy the project on a live system.
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development
-environment running
-
-   ```pip install campay
+   ```python
+        pip install campay
    ```
 
 ## Running the samples
@@ -47,6 +44,7 @@ environment running
   - Initialize the library with credentials. 
     ```python
         from campay.tools import Client
+
         campay = Client({
             "app_username" : "PASTE YOUR APP_USERNAME HERE",
             "app_password" : "PASTE YOUR APP_PASSWORD HERE",
@@ -54,8 +52,8 @@ environment running
         })
     ```
 
-  - Get an instance of the library from anywhere in your application and run the various operations.
-  # To collect payments from your client 
+### To collect payments from your client 
+
     ```python
         collect = campay.collect({
             "amount": "5", #The amount you want to collect
@@ -65,8 +63,9 @@ environment running
         })
     ```
 
-  # To disburse
+### To disburse
     > Please enable API withdrawal under app settings before trying this request
+
     ```python
         disburse = campay.disburse({
             "amount": "5", #The amount you want to disburse
@@ -76,7 +75,8 @@ environment running
         })
     ```
 
-  # To Get application balance. 
+### To Get application balance. 
+
     ```python
         balance = campay.get_balance()
     ```
