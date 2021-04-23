@@ -75,11 +75,11 @@ for notes on how to deploy the project on a live system.
         })
     ```
 
-### To Get application balance. 
+### To Get application balance.
 
     ```python
         balance = campay.get_balance()
-    ```
+   ```
 
 
 ## Deployment
