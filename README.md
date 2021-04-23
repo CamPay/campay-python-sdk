@@ -55,12 +55,12 @@ for notes on how to deploy the project on a live system.
 ### To collect payments from your client 
 
     ```python
-        collect = campay.collect({
-            "amount": "5", #The amount you want to collect
-            "currency": "XAF",
-            "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
-            "description": "some description"
-        })
+            collect = campay.collect({
+                "amount": "5", #The amount you want to collect
+                "currency": "XAF",
+                "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
+                "description": "some description"
+            })
     ```
 
 ### To disburse
