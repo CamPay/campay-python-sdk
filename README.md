@@ -63,7 +63,10 @@ for notes on how to deploy the project on a live system.
          })
 
          print(collect)
+         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+         
    ```
+   > status can be SUCCESSFUL or FAILED
 
 ### To disburse
    > Please enable API withdrawal under app settings before trying this request
@@ -77,7 +80,10 @@ for notes on how to deploy the project on a live system.
         })
 
         print(disburse)
+        #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+
    ```
+   > status can be SUCCESSFUL or FAILED
 
 ### To Get application balance.
 
@@ -85,6 +91,7 @@ for notes on how to deploy the project on a live system.
         balance = campay.get_balance()
 
         print(balance)
+        #{"total_balance": 0, "mtn_balance": 0, "orange_balance": 0, "currency": "XAF"}
    ```
 
 
