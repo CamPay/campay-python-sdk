@@ -43,7 +43,7 @@ for notes on how to deploy the project on a live system.
 
   - Initialize the library with credentials. 
     ```python
-        from campay.tools import Client
+        from campay.sdk import Client
 
         campay = Client({
             "app_username" : "PASTE YOUR APP_USERNAME HERE",
@@ -101,7 +101,7 @@ Add additional notes about how to deploy this on a live system
 Change the environment of the library introduction to PROD
 
   ```python
-        from campay.tools import Client
+        from campay.sdk import Client
         campay = Client({
             "app_username" : "PASTE YOUR APP_USERNAME HERE",
             "app_password" : "PASTE YOUR APP_PASSWORD HERE",
