@@ -75,7 +75,7 @@ for notes on how to deploy the project on a live system.
         disburse = campay.disburse({
             "amount": "5", #The amount you want to disburse
             "currency": "XAF",
-            "to": "237679587525", #Phone number to disburse amount to. Must include country code
+            "to": "2376xxxxxxxx", #Phone number to disburse amount to. Must include country code
             "description": "some description"
         })
 
