@@ -64,6 +64,7 @@ class Client():
 			print(">>>>>>>>>>>>>>>>>>: ", "Collecting...")
 
 		token = self.get_token()["token"]
+		
 		if token:
 
 			#### Request collect
@@ -133,13 +134,23 @@ class Client():
 								pass
 
 				else:
-					return {"status":"FAILED"}
+					message = collect_response_json["message"]
+					if self.debug:
+						print(">>>>>>>>>>>>>>>>>>: ", message)
+					return {"status":"FAILED", "message": message}
 
 			else:
-				return {"status":"FAILED"}
+				message = "Collect error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"FAILED", "message":message}
 
 		else:
-			return {"status":"FAILED"}
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"FAILED", "message":message}
+
 
 	def disburse(self, values):
 		if self.debug:
@@ -213,13 +224,22 @@ class Client():
 								pass
 
 				else:
-					return {"status":"FAILED"}
+					message = withdraw_response_json["message"]
+					if self.debug:
+						print(">>>>>>>>>>>>>>>>>>: ", message)
+					return {"status":"FAILED", "message": message}
 
 			else:
-				return {"status":"FAILED"}
+				message = "Disburse error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"FAILED", "message":message}
 
 		else:
-			return {"status":"FAILED"}
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"FAILED", "message":message}
 
 
 	def get_balance(self):
@@ -244,7 +264,15 @@ class Client():
 				if self.debug:
 					print(">>>>>>>>>>>>>>>>>>: ", response_json)
 				return response_json
+				
 			else:
-				return None
+				message = "Balance error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"FAILED", "message":message}
+
 		else:
-			return None
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"FAILED", "message":message}
