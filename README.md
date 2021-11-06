@@ -52,7 +52,7 @@ for notes on how to deploy the project on a live system.
         })
     ```
 
-### To collect payments from your client 
+### To collect payments from your client - DIRECTLY
 
    ```python
          collect = campay.collect({
@@ -64,6 +64,26 @@ for notes on how to deploy the project on a live system.
 
          print(collect)
          #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+         
+   ```
+   > status can be SUCCESSFUL or FAILED
+
+### To collect payments from your client - using PAYMENT LINKS
+
+   ```python
+         payment_link = campay.get_payment_link({
+            "amount": "5",
+            "currency": "XAF",
+            "description": "some description",
+            "external_reference": "12345678",
+            "redirect_url": "https://mysite.com/"
+         })
+
+         print(payment_link)
+         #{"status": "SUCCESSFUL", "link": "https://www.campay.com/pay/with/link/" }
+         '''
+         Redirect your customer to the returned payment link 
+         '''
          
    ```
    > status can be SUCCESSFUL or FAILED

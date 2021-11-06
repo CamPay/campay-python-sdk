@@ -17,6 +17,15 @@ collect = campay.collect({
 })
 
 
+collect = campay.get_payment_link({
+    "amount": "5",
+    "currency": "XAF",
+    "description": "some description",
+    "external_reference": "12345678",
+    "redirect_url": "https://mysite.com/"
+})
+
+
 disburse = campay.disburse({
     "amount": "5",
     "currency": "XAF",

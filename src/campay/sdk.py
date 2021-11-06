@@ -276,3 +276,72 @@ class Client():
 			if self.debug:
 				print(">>>>>>>>>>>>>>>>>>: ", message)
 			return {"status":"FAILED", "message":message}
+
+
+
+	def get_payment_link(self, values):
+		if self.debug:
+			print(">>>>>>>>>>>>>>>>>>: ", "Getting payment link...")
+
+		token = self.get_token()["token"]
+		
+		if token:
+
+			#### Request collect
+			collect_data = {
+				"amount":str(values["amount"]),
+				"currency": str(values["currency"]),
+				"description":str(values["description"]),
+				"external_reference":str(values["external_reference"]),
+				"redirect_url":str(values["redirect_url"])
+			}
+			collect_payload = json.dumps(collect_data)
+			collect_headers = {
+				'Authorization': 'Token '+token,
+				'Content-Type': 'application/json'
+			}
+			collect_response = requests.post(self.host+'/api/get_payment_link/', data=collect_payload, headers=collect_headers, verify=False)
+			
+			got_json_response = False
+			try:
+				collect_response_json = collect_response.json()
+				got_json_response = True
+			except:
+				pass
+			
+			if got_json_response:
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", collect_response_json)
+					
+				collect_response_status_code = int(collect_response.status_code)
+				if collect_response_status_code == 200:
+					link = collect_response_json['link']
+					if self.debug:
+						print(">>>>>>>>>>>>>>>>>>: Redirect your customer to the payment link...")
+					is_successful = True
+				else:
+					link = None
+					is_successful = False
+
+				if is_successful:
+					####Check Transaction Status
+					return {"status":"SUCCESSFUL", "link": link}
+
+				else:
+					message = collect_response_json["message"]
+					if self.debug:
+						print(">>>>>>>>>>>>>>>>>>: ", message)
+					return {"status":"FAILED", "message": message}
+
+			else:
+				message = "Collect error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"FAILED", "message":message}
+
+		else:
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"FAILED", "message":message}
+
