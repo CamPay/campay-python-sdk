@@ -13,7 +13,8 @@ collect = campay.collect({
     "amount": "5",
     "currency": "XAF",
     "from": "237xxxxxxxx",
-    "description": "some description"
+    "description": "some description",
+    "external_reference": "12345678"
 })
 
 
@@ -30,7 +31,8 @@ disburse = campay.disburse({
     "amount": "5",
     "currency": "XAF",
     "to": "237xxxxxxxx",
-    "description": "some description"
+    "description": "some description",
+    "external_reference": "12345678"
 })
 
 

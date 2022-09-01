@@ -60,10 +60,11 @@ for notes on how to deploy the project on a live system.
             "currency": "XAF",
             "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
             "description": "some description"
+            "external_reference": "", #Reference from the system initiating the transaction.
          })
 
          print(collect)
-         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "external_reference":"12345678", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
          
    ```
    > status can be SUCCESSFUL or FAILED
@@ -97,10 +98,11 @@ for notes on how to deploy the project on a live system.
             "currency": "XAF",
             "to": "2376xxxxxxxx", #Phone number to disburse amount to. Must include country code
             "description": "some description"
+            "external_reference": "", #Reference from the system initiating the transaction.
         })
 
         print(disburse)
-        #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+        #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "external_reference":"12345678", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
 
    ```
    > status can be SUCCESSFUL or FAILED

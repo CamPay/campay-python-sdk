@@ -30,10 +30,10 @@ class Client():
 		}
 
 		json_data = json.dumps(data)
-		token_response = requests.post(self.host+'/api/token/', data=json_data, headers=token_headers, verify=False)
 		
 		got_json_response = False
 		try:
+			token_response = requests.post(self.host+'/api/token/', data=json_data, headers=token_headers, verify=False)
 			json_token_response = token_response.json()
 			got_json_response = True
 		except:
@@ -73,17 +73,17 @@ class Client():
 				"currency": str(values["currency"]),
 				"from":str(values["from"]),
 				"description":str(values["description"]),
-				"external_reference":str(uuid.uuid4())
+				"external_reference":str(values["external_reference"])
 			}
 			collect_payload = json.dumps(collect_data)
 			collect_headers = {
 				'Authorization': 'Token '+token,
 				'Content-Type': 'application/json'
 			}
-			collect_response = requests.post(self.host+'/api/collect/', data=collect_payload, headers=collect_headers, verify=False)
 			
 			got_json_response = False
 			try:
+				collect_response = requests.post(self.host+'/api/collect/', data=collect_payload, headers=collect_headers, verify=False)
 				collect_response_json = collect_response.json()
 				got_json_response = True
 			except:
@@ -112,10 +112,10 @@ class Client():
 					status = "PENDING"
 					while status == "PENDING":
 						time.sleep(5)
-						status_response = requests.get(self.host+"/api/transaction/"+reference, headers=status_headers, verify=False)
 						
 						got_json_response = False
 						try:
+							status_response = requests.get(self.host+"/api/transaction/"+reference, headers=status_headers, verify=False)
 							status_response_json = status_response.json()
 							got_json_response = True
 						except:
@@ -164,17 +164,17 @@ class Client():
 				"currency": str(values["currency"]),
 				"to":str(values["to"]),
 				"description":str(values["description"]),
-				"external_reference":str(uuid.uuid4())
+				"external_reference":str(values["external_reference"])
 			}
 			withdraw_payload = json.dumps(withdraw_data)
 			withdraw_headers = {
 				'Authorization': 'Token '+token,
 				'Content-Type': 'application/json'
 			}
-			withdraw_response = requests.post(self.host+'/api/withdraw/', data=withdraw_payload, headers=withdraw_headers, verify=False)
 			
 			got_json_response = False
 			try:
+				withdraw_response = requests.post(self.host+'/api/withdraw/', data=withdraw_payload, headers=withdraw_headers, verify=False)
 				withdraw_response_json = withdraw_response.json()
 				got_json_response = True
 			except:
@@ -202,10 +202,10 @@ class Client():
 					status = "PENDING"
 					while status == "PENDING":
 						time.sleep(5)
-						status_response = requests.get(self.host+"/api/transaction/"+reference, headers=status_headers, verify=False)
 						
 						got_json_response = False
 						try:
+							status_response = requests.get(self.host+"/api/transaction/"+reference, headers=status_headers, verify=False)
 							status_response_json = status_response.json()
 							got_json_response = True
 						except:
@@ -251,10 +251,10 @@ class Client():
 				'Authorization': 'Token '+token,
 				'Content-Type': 'application/json',
 			}
-			response = requests.get(self.host+"/api/balance/", headers=status_headers, verify=False)
-									
+							
 			got_json_response = False
 			try:
+				response = requests.get(self.host+"/api/balance/", headers=status_headers, verify=False)
 				response_json = response.json()
 				got_json_response = True
 			except:
@@ -300,10 +300,10 @@ class Client():
 				'Authorization': 'Token '+token,
 				'Content-Type': 'application/json'
 			}
-			collect_response = requests.post(self.host+'/api/get_payment_link/', data=collect_payload, headers=collect_headers, verify=False)
 			
 			got_json_response = False
 			try:
+				collect_response = requests.post(self.host+'/api/get_payment_link/', data=collect_payload, headers=collect_headers, verify=False)
 				collect_response_json = collect_response.json()
 				got_json_response = True
 			except:
