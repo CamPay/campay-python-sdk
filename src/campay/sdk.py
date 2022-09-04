@@ -345,3 +345,92 @@ class Client():
 				print(">>>>>>>>>>>>>>>>>>: ", message)
 			return {"status":"FAILED", "message":message}
 
+
+
+	def transfer_airtime(self, values):
+		if self.debug:
+			print(">>>>>>>>>>>>>>>>>>: ", "Airtime Transfer...")
+		token = self.get_token()["token"]
+		if token:
+
+			#### Request airtime
+			airtime_data = {
+				"amount":str(values["amount"]),
+				"to":str(values["to"]),
+				"external_reference":str(values["external_reference"])
+			}
+			airtime_payload = json.dumps(airtime_data)
+			airtime_headers = {
+				'Authorization': 'Token '+token,
+				'Content-Type': 'application/json'
+			}
+			
+			got_json_response = False
+			try:
+				airtime_response = requests.post(self.host+'/api/utilities/airtime/transfer/', data=airtime_payload, headers=airtime_headers, verify=False)
+				airtime_response_json = airtime_response.json()
+				got_json_response = True
+			except:
+				pass
+			
+			if got_json_response:
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", airtime_response_json)
+					
+				airtime_response_status_code = int(airtime_response.status_code)
+				if airtime_response_status_code == 200:
+					reference = airtime_response_json['reference']
+					is_successful = True
+				else:
+					reference = None
+					is_successful = False
+
+				if is_successful:
+					####Check Transaction Status
+					status_headers = {
+						'Authorization': 'Token '+token,
+						'Content-Type': 'application/json',
+					}
+					
+					status = "PENDING"
+					while status == "PENDING":
+						time.sleep(5)
+						
+						got_json_response = False
+						try:
+							status_response = requests.get(self.host+"/api/utilities/transaction/"+reference+"/", headers=status_headers, verify=False)
+							status_response_json = status_response.json()
+							got_json_response = True
+						except:
+							pass
+						
+						if got_json_response:
+							status_response_status_code = int(status_response.status_code)
+							if status_response_status_code == 200:
+								status = status_response_json['status']
+								
+								if status != "PENDING":
+									if self.debug:
+										print(">>>>>>>>>>>>>>>>>>: ", status_response_json)
+									return status_response_json
+							else:
+								pass
+
+				else:
+					message = airtime_response_json["message"]
+					if self.debug:
+						print(">>>>>>>>>>>>>>>>>>: ", message)
+					return {"status":"FAILED", "message": message}
+
+			else:
+				message = "Disburse error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"FAILED", "message":message}
+
+		else:
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"FAILED", "message":message}
+

@@ -43,9 +43,9 @@ for notes on how to deploy the project on a live system.
 
   - Initialize the library with credentials. 
     ```python
-        from campay.sdk import Client
+        from campay.sdk import Client as CamPayClient
 
-        campay = Client({
+        campay = CamPayClient({
             "app_username" : "PASTE YOUR APP_USERNAME HERE",
             "app_password" : "PASTE YOUR APP_PASSWORD HERE",
             "environment" : "DEV" #use "DEV" for demo mode or "PROD" for live mode
@@ -59,7 +59,7 @@ for notes on how to deploy the project on a live system.
             "amount": "5", #The amount you want to collect
             "currency": "XAF",
             "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
-            "description": "some description"
+            "description": "some description",
             "external_reference": "", #Reference from the system initiating the transaction.
          })
 
@@ -97,7 +97,7 @@ for notes on how to deploy the project on a live system.
             "amount": "5", #The amount you want to disburse
             "currency": "XAF",
             "to": "2376xxxxxxxx", #Phone number to disburse amount to. Must include country code
-            "description": "some description"
+            "description": "some description",
             "external_reference": "", #Reference from the system initiating the transaction.
         })
 
@@ -116,6 +116,21 @@ for notes on how to deploy the project on a live system.
         #{"total_balance": 0, "mtn_balance": 0, "orange_balance": 0, "currency": "XAF"}
    ```
 
+### Transfer Airtime
+   > Please enable API withdrawal under app settings before trying this request
+   
+   ```python
+        airtime = campay.transfer_airtime({
+            "amount": "100", #The amount you want to transfer
+            "to": "2376xxxxxxxx", #Phone number to receive airtime. Must include country code
+            "external_reference": "", #Reference from the system initiating the transaction.
+        })
+
+        print(airtime)
+        #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "external_reference":"12345678", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027U00005", "operator_reference":  "1880106956" }
+
+   ```
+   > status can be SUCCESSFUL or FAILED
 
 ## Deployment
 

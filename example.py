@@ -1,8 +1,8 @@
 
-from campay.sdk import Client
+from campay.sdk import Client as CamPayClient
 
 
-campay = Client({
+campay = CamPayClient({
     "app_username" : "",
     "app_password" : "",
     "environment" : "DEV" #"DEV" = demo mode, "PROD" = live mode
@@ -32,6 +32,13 @@ disburse = campay.disburse({
     "currency": "XAF",
     "to": "237xxxxxxxx",
     "description": "some description",
+    "external_reference": "12345678"
+})
+
+
+airtime = campay.transfer_airtime({
+    "amount": "100",
+    "to": "237xxxxxxxx",
     "external_reference": "12345678"
 })
 
