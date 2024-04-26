@@ -54,6 +54,8 @@ for notes on how to deploy the project on a live system.
 
 ### To collect payments from your client - DIRECTLY
 
+   **OPTION 1**: This option initiates a transaction and waits( or block the running code) for the transaction to complete before returning a response. 
+
    ```python
          collect = campay.collect({
             "amount": "5", #The amount you want to collect
@@ -68,6 +70,24 @@ for notes on how to deploy the project on a live system.
          
    ```
    > status can be SUCCESSFUL or FAILED
+
+   **OPTION 2**: This option initiates a transaction and immediately returns the initiated transaction reference for you to use to check the status of the transaction.
+
+   ```python
+         collect = campay.initCollect({
+            "amount": "5", #The amount you want to collect
+            "currency": "XAF",
+            "from": "2376xxxxxxxx", #Phone number to request amount from. Must include country code
+            "description": "some description",
+            "external_reference": "", #Reference from the system initiating the transaction.
+         })
+
+         print(collect)
+         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "ussd_code": "*126# for MTN or #150*50# for ORANGE", "operator": "mtn or orange" }
+         
+   ```
+   > The default status for initiated transactions is PENDING
+   
 
 ### To collect payments from your client - using PAYMENT LINKS
 
@@ -88,6 +108,23 @@ for notes on how to deploy the project on a live system.
          
    ```
    > status can be SUCCESSFUL or FAILED
+
+
+### To check a transaction status.
+
+   You need the initiated transaction **reference** to use this function.
+
+   ```python
+         campay_status = campay.get_transaction_status({
+            "reference": "bcedde9b-62a7-1234-96ac-2e6179552a1a", #The amount you want to collect
+         })
+
+         print(campay_status)
+         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "external_reference":"12345678", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+         
+   ```
+   > status can be PENDING, SUCCESSFUL or FAILED
+
 
 ### To disburse
    > Please enable API withdrawal under app settings before trying this request

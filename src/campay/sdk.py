@@ -59,6 +59,7 @@ class Client():
 			return {"token":None, "is_successful":False}
 
 	
+
 	def collect(self, values):
 		if self.debug:
 			print(">>>>>>>>>>>>>>>>>>: ", "Collecting...")
@@ -152,6 +153,69 @@ class Client():
 			return {"status":"FAILED", "message":message}
 
 
+
+	def initCollect(self, values):
+		if self.debug:
+			print(">>>>>>>>>>>>>>>>>>: ", "Collecting...")
+
+		token = self.get_token()["token"]
+		
+		if token:
+
+			#### Request collect
+			collect_data = {
+				"amount":str(values["amount"]),
+				"currency": str(values["currency"]),
+				"from":str(values["from"]),
+				"description":str(values["description"]),
+				"external_reference":str(values["external_reference"])
+			}
+			collect_payload = json.dumps(collect_data)
+			collect_headers = {
+				'Authorization': 'Token '+token,
+				'Content-Type': 'application/json'
+			}
+			
+			got_json_response = False
+			try:
+				collect_response = requests.post(self.host+'/api/collect/', data=collect_payload, headers=collect_headers, verify=False)
+				collect_response_json = collect_response.json()
+				got_json_response = True
+			except:
+				pass
+			
+			if got_json_response:
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", collect_response_json)
+					
+				collect_response_status_code = int(collect_response.status_code)
+				if collect_response_status_code == 200:
+					print(">>>>>>>>>>>>>>>>>>: Confirm on phone...")
+					return collect_response_json
+				else:
+
+					message = collect_response_json["message"]
+					if self.debug:
+						print(">>>>>>>>>>>>>>>>>>: ", message)
+
+					return {"status":"FAILED", "message": message}
+
+			else:
+				message = "Collect error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"FAILED", "message":message}
+
+		else:
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"FAILED", "message":message}
+
+
+
+
+
 	def disburse(self, values):
 		if self.debug:
 			print(">>>>>>>>>>>>>>>>>>: ", "Disbursing...")
@@ -240,6 +304,7 @@ class Client():
 			if self.debug:
 				print(">>>>>>>>>>>>>>>>>>: ", message)
 			return {"status":"FAILED", "message":message}
+
 
 
 	def get_balance(self):
@@ -434,3 +499,44 @@ class Client():
 				print(">>>>>>>>>>>>>>>>>>: ", message)
 			return {"status":"FAILED", "message":message}
 
+
+
+	def get_transaction_status(self, values):
+		if self.debug:
+			print(">>>>>>>>>>>>>>>>>>: ", "Getting Transaction status...")
+		token = self.get_token()["token"]
+		if token:
+			try:
+				reference = values["reference"]
+			except:
+				return {"status":"", "message":"Transaction Reference is required"}
+			
+			status_headers = {
+				'Authorization': 'Token '+token,
+				'Content-Type': 'application/json',
+			}
+							
+			got_json_response = False
+			try:
+				response = requests.get(self.host+f"/api/transaction/{reference}/", headers=status_headers, verify=False)
+				response_json = response.json()
+				got_json_response = True
+			except:
+				pass
+
+			if got_json_response:
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", response_json)
+				return response_json
+				
+			else:
+				message = "Request error"
+				if self.debug:
+					print(">>>>>>>>>>>>>>>>>>: ", message)
+				return {"status":"", "message":message}
+
+		else:
+			message = "Token error. Please check your App Username and Pass password. Also check your environment"
+			if self.debug:
+				print(">>>>>>>>>>>>>>>>>>: ", message)
+			return {"status":"", "message":message}

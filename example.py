@@ -18,6 +18,15 @@ collect = campay.collect({
 })
 
 
+collect = campay.initCollect({
+    "amount": "5",
+    "currency": "XAF",
+    "from": "237xxxxxxxx",
+    "description": "some description",
+    "external_reference": "12345678"
+})
+
+
 collect = campay.get_payment_link({
     "amount": "5",
     "currency": "XAF",
@@ -44,3 +53,8 @@ airtime = campay.transfer_airtime({
 
 
 balance = campay.get_balance()
+
+
+campay_status = campay.get_transaction_status({
+    "reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a"
+})
