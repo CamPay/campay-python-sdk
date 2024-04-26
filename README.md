@@ -87,7 +87,21 @@ for notes on how to deploy the project on a live system.
          
    ```
    > The default status for initiated transactions is PENDING
-   
+
+### To check a transaction status.
+
+   You need the initiated transaction **reference** to use this function.
+
+   ```python
+         campay_status = campay.get_transaction_status({
+            "reference": "bcedde9b-62a7-1234-96ac-2e6179552a1a", #The amount you want to collect
+         })
+
+         print(campay_status)
+         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "external_reference":"12345678", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
+         
+   ```
+   > status can be PENDING, SUCCESSFUL or FAILED
 
 ### To collect payments from your client - using PAYMENT LINKS
 
@@ -108,22 +122,6 @@ for notes on how to deploy the project on a live system.
          
    ```
    > status can be SUCCESSFUL or FAILED
-
-
-### To check a transaction status.
-
-   You need the initiated transaction **reference** to use this function.
-
-   ```python
-         campay_status = campay.get_transaction_status({
-            "reference": "bcedde9b-62a7-1234-96ac-2e6179552a1a", #The amount you want to collect
-         })
-
-         print(campay_status)
-         #{"reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a", "external_reference":"12345678", "status": "SUCCESSFUL", "amount": 5, "currency": "XAF", "operator": "MTN", "code": "CP201027T00005", "operator_reference":  "1880106956" }
-         
-   ```
-   > status can be PENDING, SUCCESSFUL or FAILED
 
 
 ### To disburse
