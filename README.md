@@ -111,14 +111,13 @@ for notes on how to deploy the project on a live system.
             "currency": "XAF",
             "description": "some description",
             "external_reference": "12345678",
-				#
-				"from":"2376xxxxxxxx",
-				"first_name":"John",
-				"last_name":"Doe",
-				"email":"",
+            "from":"2376xxxxxxxx",
+            "first_name":"John",
+            "last_name":"Doe",
+            "email":"",
             "redirect_url": "https://mysite.com/",
-				"failure_redirect_url":"https://failed.com/",
-				"payment_options":"MOMO,CARD"
+            "failure_redirect_url":"https://failed.com/",
+            "payment_options":"MOMO,CARD"
          })
 
          print(payment_link)
