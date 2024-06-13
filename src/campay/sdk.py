@@ -358,7 +358,14 @@ class Client():
 				"currency": str(values["currency"]),
 				"description":str(values["description"]),
 				"external_reference":str(values["external_reference"]),
-				"redirect_url":str(values["redirect_url"])
+				"redirect_url":str(values["redirect_url"]),
+				#
+				"from":str(values["from"]),
+				"first_name":str(values["first_name"]),
+				"last_name":str(values["last_name"]),
+				"email":str(values["email"]),
+				"failure_redirect_url":str(values["failure_redirect_url"]),
+				"payment_options":str(values["payment_options"])
 			}
 			collect_payload = json.dumps(collect_data)
 			collect_headers = {

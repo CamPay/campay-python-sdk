@@ -30,9 +30,15 @@ collect = campay.initCollect({
 collect = campay.get_payment_link({
     "amount": "5",
     "currency": "XAF",
-    "description": "some description",
-    "external_reference": "12345678",
-    "redirect_url": "https://mysite.com/"
+    "from": "2376XXXXXXXX",
+    "description": "Test",
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "example@mail.com",
+    "external_reference": "",
+    "redirect_url": "https://example.com",
+    "failure_redirect_url": "https://example.com",
+    "payment_options":"MOMO,CARD"
 })
 
 
