@@ -94,7 +94,7 @@ for notes on how to deploy the project on a live system.
 
    ```python
          campay_status = campay.get_transaction_status({
-            "reference": "bcedde9b-62a7-1234-96ac-2e6179552a1a", #The amount you want to collect
+            "reference": "bcedde9b-62a7-1234-96ac-2e6179552a1a", #The reference returned from campay.initCollect
          })
 
          print(campay_status)
@@ -121,9 +121,10 @@ for notes on how to deploy the project on a live system.
          })
 
          print(payment_link)
-         #{"status": "SUCCESSFUL", "link": "https://www.campay.com/pay/with/link/" }
+         #{"status": "SUCCESSFUL", "link": "https://www.campay.com/pay/with/link/", "reference": "bcedde9b-62a7-4421-96ac-2e6179552a1a"}
          '''
-         Redirect your customer to the returned payment link 
+         Redirect your customer to the returned payment link. 
+         You can use the "reference" to verify the status of the transaction. If check the transaction status and client has not initiated a transaction on the payment link, you will get a response telling you the transaction is not found.
          '''
          
    ```
@@ -156,7 +157,7 @@ for notes on how to deploy the project on a live system.
         print(balance)
         #{"total_balance": 0, "mtn_balance": 0, "orange_balance": 0, "currency": "XAF"}
    ```
-
+<!-- 
 ### Transfer Airtime
    > Please enable API withdrawal under app settings before trying this request
    
@@ -172,6 +173,7 @@ for notes on how to deploy the project on a live system.
 
    ```
    > status can be SUCCESSFUL or FAILED
+-->
 
 ## Deployment
 
